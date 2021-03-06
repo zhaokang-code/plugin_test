@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ 	<link rel="stylesheet" href="/static/css/index.css"/>
+	<title>Midea插件埋点测试</title>
+	<style type="text/css">
+	table tr td,th{ border:2px solid #000;}   /*表格添加边框*/
+
+	.table1{
+	margin:0 auto;
+	}
+
+	.file{
+	position: absolute;
+	left:800px;
+	top:100px;
+	}
+	.plugin{
+	position: absolute;
+	left:600px;
+	top:100px;
+	}
+
+	</style>
+ </head>
+
+<body>	
+	     <center ><h2>冰箱插件埋点测试</h2></center><hr>
+
+ <table class="table1" id = "tab">
+		
+   	<form action="/upload/" enctype='multipart/form-data' method='POST'>
+   		<input type="file" name ="file" value="text" class="plugin">
+   		<input type="submit" class="file" value="上传文件"><br><br>
+   		<a href="{{ url_for('add') }}" target="_blank" class="item1">添加埋点</a><br>
+   		<a href="{{ url_for('batch_search')}}" class="item2">批量查询</a><br>
+   		<a href="{{ url_for('report')}}" class="item3">生成报告</a>&nbsp;
+   		 	 
+    </form> 				
+                     <caption></caption>
+	<thead>
+		<tr>
+			<th style="width:50px; height:40px;">埋点ID</th>
+			<th style="width:200px; height:40px;">埋点说明</th>
+			<th style="width:270px; height:40px;">埋点关键字</th>
+			<th style="width:100px; height:40px;">操作</th>
+			<th style="width:700px; height:40px;">埋点查询结果</th>
+		</tr>
+	</thead>
+		<tbody>
+			      {% for base_obj in maidian_list %}
+		    <tr>
+				<td>{{ base_obj.id }}</td>
+				<td>所在页面：<br><textarea cols="25" rows="2">{{ base_obj.page_location }}</textarea><br>
+					操作动作：<br><textarea cols="25" rows="5">{{base_obj.touch_show}}</textarea></td>			
+				<td>page_name:<br><span>{{base_obj.page_name}}</span><br><br>
+					sub_action:<br><span>{{base_obj.sub_action}}</span><br><br>
+					prev_page_name:<br><span>{{base_obj.prev_page_name}}</span>
+				<td><a href="{{ url_for('update',pk=base_obj.id)}}" class="list-group-item">编辑</a><br>
+					<a href="{{ url_for('single_search',pk=base_obj.id)}}" class="list-group-item">查询</a><br>
+					<a href="{{ url_for('delete',pk=base_obj.id)}}" class="list-group-item">删除</a></td>
+				<td><textarea cols="112" rows="10" warp="off">{{base_obj.res}}</textarea></td>			
+		    </tr>  
+			       {% endfor %}
+		</tbody>
+		
+		<tfoot></tfoot>
+  </table>
+ 
+</body>
+</html>

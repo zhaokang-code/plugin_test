@@ -1,0 +1,100 @@
+
+度秘开启：
+adb shell am start -ncom.baidu.duersdkdemo/.MainActivity
+查看进程：
+adb shell ps| find "duer"
+
+
+
+
+
+查看ADB端口号：
+adb nodaemon server
+
+查看ADB端口被哪个进程占用：
+
+netstat -ano | findstr "5037"
+
+
+tasklist|findstr "7148"
+
+adb server版本指的是模拟器中adb程序的版本
+client 的版本指的是SDK中adb的程序版本
+
+
+ADB启动app:
+adb shell am start -n 包名
+
+退出app:
+adb shell am force-stop 包名
+
+列出所有应用包名：
+adb shell pm list packages
+列出所有目录：
+ls -al
+指定设备shell:
+adb -s AUK0BWTYXQ shell
+获取设备型号：
+adb shell
+cat /system/build.prop | grep "product"
+
+230:
+com.midea.fridge.pad/com.midea.fridge.pad.screensaver.ScreensaverActivity
+
+
+
+1.启动屏端APP：
+adb shell monkey -p com.midea.fridge.pad -c android.intent.category.LAUNCHER 1
+或
+adb shell am start -n 包名/启动的activity  （失败）
+
+2.关闭APP：
+adb shell am force-stop com.midea.fridge.pad （关闭后又重启了）
+
+3.命令查看当前运行的包名和Activity:
+           adb shell dumpsys window | findstr mCurrentFocus
+
+activityName获取:
+           adb shell dumpsys window w | findstr \/ | findstr name=
+或
+           adb shell dumpsys window |findstr mCurrent
+或
+           adb shell dumpsys activity | findstr "mFocusedActivity"
+
+4.删除与包相关的所有数据：清除数据和缓存
+adb shell pm clear com.midea.smart.sorgo
+
+5.查看APP路径：adb shell pm path com.midea.smart.sorgo
+com.midea.fridge.pad
+
+6.截屏：
+adb shell /system/bin/screencap -p /sdcard/screenshot.png
+
+adb pull /sdcard/screenshot.png \MyData\zhaokang\Desktop\log\1.png
+
+备注：只能pull到原始路径下才能正常打开截图
+
+
+7.录制视频：
+adb shell screenrecord /sdcard/test1.mp4
+adb pull /sdcard/test1.mp4 E:\PULL
+
+
+дmodel            :  
+                            (718дA0665   543дA0443)
+adb root
+adb remount
+adb shell
+cd sdcard
+cd midea
+echo -n 'A0508'>model
+
+pip安装：在python的script文件下打开cmd,命令行钟运行：easy_install.exe pip
+pip升级：python -m pip install --upgrade pip
+
+launcher包名：
+com.android.launcher3/com.android.launcher3.Launcher
+
+adb shell am start com.android.settings/com.android.settings.Settings
+
+

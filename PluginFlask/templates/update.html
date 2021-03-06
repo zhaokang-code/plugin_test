@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% block style %}
+<style type="text/css">
+.mydiv{
+	width:200px;
+	height:100px;
+	background:white;
+	border:2px;
+}
+{% endblock %}
+</style>
+
+	{% block title %}
+	<title>编辑埋点信息</title>
+	{% endblock %}
+
+</head>
+
+<body>
+<center ><h3>编辑埋点</h3></center>
+		<div class="mydiv" style="">
+		<form method='post'>
+			
+		埋点路径：{{form.page_location}}<br>
+		埋点触发说明：{{form.touch_show}}<br><br>
+		<p>选择埋点关键字</p>
+		<ol>
+		<li>page_name:<br>{{form.page_name}}<br></li>
+		<li>sub_action:<br>{{form.sub_action}}<br></li>
+		<li>prev_page_name:<br>{{form.prev_page_name}}<br>
+		</li>
+			{{ form.csrf_token }}
+			{{ form.submit }}
+		</ol>	
+		</form>
+		</div>
+		
+	
+
+</body>
+</html>
